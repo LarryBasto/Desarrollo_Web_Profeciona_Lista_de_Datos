@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>Lista de Datos Generados</h1>
-      <button @click="toggleSort">Toggle Sort</button>
+      <button @click="toggleSort">orden</button>
       <ul>
         <item-lista-datos v-for="item in items" :key="item.id" :item="item" @change-color="changeColor"></item-lista-datos>
       </ul>

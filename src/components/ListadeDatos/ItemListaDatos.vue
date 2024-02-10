@@ -2,11 +2,12 @@
     <li class="list-item" :style="{ backgroundColor: item.color }">
       <span class="text" :style="{ color: textColor }">{{ item.text }}</span>
       <button class="btn" @click="changeColor">Cambiar Color</button>
+      <button class="btn" @click="deleteItem">Eliminar</button>
     </li>
   </template>
   
   <script setup lang="ts">
-  import { defineProps, ref, onMounted, getCurrentInstance } from 'vue';
+  import { defineProps, ref, getCurrentInstance } from 'vue';
   
   interface ListItem {
     id: number;
@@ -19,11 +20,15 @@
   }>();
   
   const ctx = getCurrentInstance();
-  const textColor = ref('#000000'); 
+  const textColor = ref('#000000');
   
   const changeColor = () => {
     const newColor = getRandomColor();
     ctx.emit('change-color', props.item.id, newColor);
+  };
+  
+  const deleteItem = () => {
+    ctx.emit('delete-item', props.item.id);
   };
   
   const getRandomColor = () => {
@@ -47,6 +52,7 @@
   
   .btn {
     padding: 8px 12px;
+    margin-left: 5px;
     border: none;
     border-radius: 3px;
     background-color: #007bff;
@@ -60,3 +66,4 @@
     transform: scale(1.05);
   }
   </style>
+  
